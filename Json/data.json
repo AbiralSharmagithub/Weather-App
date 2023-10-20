@@ -1,0 +1,38 @@
+[
+ {  "temperature":"50\u00b0C", 
+    "images":"Images/clear.png",
+    "humdity":"53%",
+    "wind_speed":"4km/hr",
+    "country":"Nepal"
+ },
+ {  "temperature":"30\u00b0C", 
+    "images":"Images/clouds.png",
+    "humdity":"45%",
+    "wind_speed":"6km/hr",
+    "country":"India"
+ },
+ {  "temperature":"20\u00b0C", 
+    "images":"Images/drizzle.png",
+    "humdity":"70%",
+    "wind_speed":"8km/hr",
+    "country":"Uk"
+ },
+ {  "temperature":"40\u00b0C", 
+    "images":"Images/mist.png",
+    "humdity":"53%",
+    "wind_speed":"5km/hr",
+    "country":"China"
+ },
+ {  "temperature":"15\u00b0C", 
+    "images":"Images/rain.png",
+    "humdity":"75%",
+    "wind_speed":"7km/hr",
+    "country":"Canada"
+ },
+ {  "temperature":"-2\u00b0C", 
+ "images":"Images/clear.png",
+ "humdity":"28%",
+ "wind_speed":"2km/hr",
+ "country":"America"
+}
+]
