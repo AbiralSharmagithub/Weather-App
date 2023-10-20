@@ -1,8 +1,35 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+    margin : 0;
+    padding : 0;
+    box-sizing : border-box;
+    overflow : hidden;
 }
-body{
-    background-color: #222;
+body {
+     background-color:#67dab4d2; 
+}
+#search-weather {
+    width : 100%;
+    display : flex;
+    justify-content : center;
+    margin-top : 10vh;
+}
+ #option {
+    padding: 2vh;
+    width: 40%;
+    border: 0;
+    outline: none;
+    font-size: 18px;
+    border-radius: 40px;
+    margin-right: 2vw;
+    background-color: #ebfffc;
+} 
+#button {
+    padding: 2vh;
+    border: none;
+    font-size: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+#button:active {
+    background-color: aquamarine;
 }
