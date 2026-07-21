@@ -1,29 +1,47 @@
-fetch('./Json/data.json')
-.then((reponse)=>{
-    if(!reponse.ok){
-    throw new Error("Your fetch data is showing problem");
+const inputText = document.getElementById("search");
+const searchButton = document.getElementById("search-btn");
+searchButton.addEventListener("click", weather);
+function weather() {
+  displayTempearture();
+}
+function displayTempearture() {
+  let place = inputText.value;
+  async function getWeather() {
+    let responseURL = await fetch(
+      `https://geocoding-api.open-meteo.com/v1/search?name=${place}&count=1`,
+    );
+    let dataURL = await responseURL.json();
+    console.log(dataURL);
+    if (inputText.value == "" || !dataURL.results) {
+      document.getElementById("wrong").style.display = "inline-block";
+      document.getElementById("wrong").textContent = " sorry cannot found it ";
+      return;
     }
-else
-return reponse.json();
-})
-.then(myobj=>{
-const mydata=myobj;
-console.log(mydata);
-const weatherSearch=document.createElement("div");
- weatherSearch.className="weather";
- weatherSearch.innerHTML=`
- <form id="search-weather">
- <input type="text" placeholder="Enter the name of country" id="option"> 
- <button id="button"><i class="fa-solid fa-magnifying-glass"></i></button> 
- </form>`
- document.body.appendChild(weatherSearch);
- mydata.forEach(data=> {
- console.log(data);
- const  countryWeather=document.createElement("div");
- countryWeather.className="weatherInfo";
- countryWeather.innerHTML=data.image;
- weatherSearch.appendChild(countryWeather);
- })})
- .catch(err=>{
- console.log(err);
-})
+    let result = dataURL.results[0];
+    if (
+      result.feature_code !== "PCLI" ||
+      result.feature_code.startsWith("PPL")
+    ) {
+      document.getElementById("wrong").style.display = "inline-block";
+      document.getElementById("wrong").textContent = "Location is not found";
+      return;
+    }
+    let longitude = dataURL.results[0].longitude;
+    let latitude = dataURL.results[0].latitude;
+    let weatherURL = await fetch(
+      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,wind_speed_10m`,
+    );
+    let weatherData = await weatherURL.json();
+    console.log(weatherData);
+    const temperature = weatherData.current.temperature_2m;
+    const humidity = weatherData.current.relative_humidity_2m;
+    const windSpeed = weatherData.current.wind_speed_10m;
+    document.getElementById("weather").innerHTML =
+      `<p class="country-name">${place} 
+        ${temperature}${
+          weatherData.current_units.temperature_2m
+        }${humidity}${weatherData.current_units.relative_humidity_2m}${windSpeed}
+        ${weatherData.current_units.wind_speed_10m}</p> `;
+  }
+  getWeather();
+}
